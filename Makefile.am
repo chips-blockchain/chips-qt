@@ -5,7 +5,7 @@
 ACLOCAL_AMFLAGS = -I build-aux/m4
 SUBDIRS = src
 if ENABLE_MAN
-SUBDIRS += doc/man
+SUBDIRS += doc/bitcoin/man
 endif
 .PHONY: deploy FORCE
 
@@ -37,7 +37,7 @@ OSX_INSTALLER_ICONS=$(top_srcdir)/src/qt/res/icons/bitcoin.icns
 OSX_PLIST=$(top_builddir)/share/qt/Info.plist #not installed
 OSX_QT_TRANSLATIONS = da,de,es,hu,ru,uk,zh_CN,zh_TW
 
-DIST_DOCS = $(wildcard doc/*.md) $(wildcard doc/release-notes/*.md)
+DIST_DOCS = $(wildcard doc/bitcoin/*.md) $(wildcard doc/bitcoin/release-notes/*.md)
 DIST_CONTRIB = $(top_srcdir)/contrib/bitcoin-cli.bash-completion \
 	       $(top_srcdir)/contrib/bitcoin-tx.bash-completion \
 	       $(top_srcdir)/contrib/bitcoind.bash-completion \
@@ -54,7 +54,7 @@ BIN_CHECKS=$(top_srcdir)/contrib/devtools/symbol-check.py \
 WINDOWS_PACKAGING = $(top_srcdir)/share/pixmaps/bitcoin.ico \
   $(top_srcdir)/share/pixmaps/nsis-header.bmp \
   $(top_srcdir)/share/pixmaps/nsis-wizard.bmp \
-  $(top_srcdir)/doc/README_windows.txt
+  $(top_srcdir)/doc/bitcoin/README_windows.txt
 
 OSX_PACKAGING = $(OSX_DEPLOY_SCRIPT) $(OSX_FANCY_PLIST) $(OSX_INSTALLER_ICONS) \
   $(top_srcdir)/contrib/macdeploy/$(OSX_BACKGROUND_SVG) \
@@ -277,20 +277,20 @@ CLEANFILES = $(OSX_DMG) $(BITCOIN_WIN_INSTALLER)
 
 DISTCHECK_CONFIGURE_FLAGS = --enable-man
 
-doc/doxygen/.stamp: doc/Doxyfile FORCE
+doc/bitcoin/doxygen/.stamp: doc/bitcoin/Doxyfile FORCE
 	$(MKDIR_P) $(@D)
 	$(DOXYGEN) $^
 	$(AM_V_at) touch $@
 
 if HAVE_DOXYGEN
-docs: doc/doxygen/.stamp
+docs: doc/bitcoin/doxygen/.stamp
 else
 docs:
 	@echo "error: doxygen not found"
 endif
 
 clean-docs:
-	rm -rf doc/doxygen
+	rm -rf doc/bitcoin/doxygen
 
 clean-local: clean-docs
 	rm -rf coverage_percent.txt test_bitcoin.coverage/ total.coverage/ test/tmp/ cache/ $(OSX_APP)

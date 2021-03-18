@@ -1,9 +1,11 @@
 #!/bin/bash
-# EMC2 build script for Ubuntu & Debian 9 v.3 (c) Decker (and webworker)
-# modified for CHIPS by Duke Leto
+CHIPS_ROOT=$(pwd)
+CHIPS_DEPENDS="${CHIPS_ROOT}/depends"
+cd ${CHIPS_DEPENDS}
+make -j$(nproc)
+cd ${CHIPS_ROOT}
 
 berkeleydb() {
-    CHIPS_ROOT=$(pwd)
     CHIPS_PREFIX="${CHIPS_ROOT}/db4"
     mkdir -p $CHIPS_PREFIX
     wget -N 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
@@ -31,13 +33,9 @@ EOL
     make install
     cd $CHIPS_ROOT
 }
-
-buildCHIPS() {
-    git pull
-    ./autogen.sh
-    ./configure LDFLAGS="-L${CHIPS_PREFIX}/lib/" CPPFLAGS="-I${CHIPS_PREFIX}/include/" --with-gui=no --disable-tests --disable-bench --without-miniupnpc --enable-experimental-asm --enable-static --disable-shared
-    make -j$(nproc)
-}
 berkeleydb
-buildCHIPS
-echo "Done building CHIPS!"
+./autogen.sh
+./configure --prefix=${CHIPS_DEPENDS}/x86_64-pc-linux-gnu LDFLAGS="-L${CHIPS_PREFIX}/lib/" CPPFLAGS="-I${CHIPS_PREFIX}/include/" --with-gui=yes --disable-tests --disable-bench --enable-upnp-default --enable-experimental-asm --enable-static --disable-shared
+make -j$(nproc)
+
+echo "Done building CHIPS-Qt !"
