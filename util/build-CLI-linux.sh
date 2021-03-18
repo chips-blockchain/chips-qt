@@ -1,6 +1,4 @@
 #!/bin/bash
-# EMC2 build script for Ubuntu & Debian 9 v.3 (c) Decker (and webworker)
-# modified for CHIPS by Duke Leto
 
 berkeleydb() {
     CHIPS_ROOT=$(pwd)
@@ -33,7 +31,6 @@ EOL
 }
 
 buildCHIPS() {
-    git pull
     ./autogen.sh
     ./configure LDFLAGS="-L${CHIPS_PREFIX}/lib/" CPPFLAGS="-I${CHIPS_PREFIX}/include/" --with-gui=no --disable-tests --disable-bench --without-miniupnpc --enable-experimental-asm --enable-static --disable-shared
     make -j$(nproc)
