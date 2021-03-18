@@ -26,15 +26,20 @@ development is happening in the [pangea-poker repo](https://github.com/chips-blo
 Development Process
 -------------------
 
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/chips-blockchain/chips/tags) are created
-regularly to indicate new official, stable release versions of Bitcoin Core.
+The `dev` branch is a "work in progress" and may or may not be stable.
+
+The `beta` branch is built and tested often, but is not guaranteed to be completely stable.
+
+The `master` branch is built and tested including stable updates and the most stable. 
+
+[Tags](https://github.com/chips-blockchain/chips-qt/tags) are created
+regularly to indicate new official, stable release versions of CHIPS Core.
 
 Compile, Build and Release Guide
 --------------------------------
 
-Steps to compile and run the chips node are mentioned in [COMPILE.md](/COMPILE.md). <br/>
-Steps to generate the chips-qt wallet are mentioned in [CHIPS-QT.md](CHIPS-QT.md).
+Steps to compile and run the chips node are mentioned in [COMPILE.md](/doc/COMPILE.md). <br/>
+Steps to generate the chips-qt wallet are mentioned in [CHIPS-QT.md](/doc/CHIPS-QT.md).
 
 CHIPS Community - Discord
 -------------------------
